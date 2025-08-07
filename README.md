@@ -152,6 +152,17 @@ Although `sendDebugSignalsToSegment` offers convenience for logging events remot
       )
   ```
 
+## Fragment Tracking
+
+Fragment tracking is now supported with some limitations:
+
+- Fragment tracking is enabled by default via `SignalsActivityTrackingPlugin`.
+- Transitions between **activities and fragments** are supported.
+- **VERY LIMITED** support for `ViewPager` / `ViewPager2`:  
+  Due to caching behavior, the data reported by `FragmentManager.FragmentLifecycleCallbacks` can be unreliable. This may result in inaccurate tracking—such as repeated navigation events for the same screen followed by an unexpected jump to a new screen.
+- It is **strongly recommended** to migrate to **Jetpack Compose**, which provides significantly more reliable tracking.
+
+
 ## Breaking Changes
 
 ### 0.8.0 -> 0.9.0
