@@ -15,13 +15,13 @@ implementation ("com.segment.analytics.kotlin:android:1.21.0")
 // live plugin 
 implementation("com.segment.analytics.kotlin:analytics-kotlin-live:1.3.0")
 // signal core   
-implementation ("com.segment.analytics.kotlin.signals:core:0.8.0")
+implementation ("com.segment.analytics.kotlin.signals:core:0.9.0")
 // signal compose plugin if need to track compose     
-implementation ("com.segment.analytics.kotlin.signals:compose:0.8.0")
+implementation ("com.segment.analytics.kotlin.signals:compose:0.9.0")
 // signal okttp3 plugin if need to track okhttp3 network activity  
-implementation ("com.segment.analytics.kotlin.signals:okhttp3:0.8.0")
+implementation ("com.segment.analytics.kotlin.signals:okhttp3:0.9.0")
 // signal navigation plugin if need to track screen/route  
-implementation ("com.segment.analytics.kotlin.signals:navigation:0.8.0")
+implementation ("com.segment.analytics.kotlin.signals:navigation:0.9.0")
 ```
 
 2. Setup the initialization code
@@ -59,7 +59,7 @@ navController.turnOnScreenTracking()
   
   add dependency:
   ```groovy
-  implementation ("com.segment.analytics.kotlin.signals:okhttp3:0.8.0")
+  implementation ("com.segment.analytics.kotlin.signals:okhttp3:0.9.0")
   ```
 
   install plugin:
@@ -73,7 +73,7 @@ navController.turnOnScreenTracking()
 
   add dependency:
   ```groovy
-  implementation ("com.segment.analytics.kotlin.signals:okhttp3:0.8.0")
+  implementation ("com.segment.analytics.kotlin.signals:okhttp3:0.9.0")
   ```
   
   install plugin:
@@ -90,7 +90,7 @@ navController.turnOnScreenTracking()
 * For java.net.HttpURLConnection:
     add dependency:
     ```groovy
-    implementation ("com.segment.analytics.kotlin.signals:java-net:0.8.0")
+    implementation ("com.segment.analytics.kotlin.signals:java-net:0.9.0")
     ```
     
     install plugin:
