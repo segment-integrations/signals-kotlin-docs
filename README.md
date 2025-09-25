@@ -3,6 +3,7 @@
   - [Getting Started](#getting-started)
   - [Configuration Options](#configuration-options)
   - [Debug Mode](#debug-mode)
+  - [Fragment Tracking](#fragment-tracking)
   - [Breaking Changes](#breaking-changes)
     - [0.8.0 -\> 0.9.0](#080---090)
 
@@ -15,13 +16,16 @@ implementation ("com.segment.analytics.kotlin:android:1.21.0")
 // live plugin 
 implementation("com.segment.analytics.kotlin:analytics-kotlin-live:1.3.0")
 // signal core   
-implementation ("com.segment.analytics.kotlin.signals:core:0.9.0")
-// signal compose plugin if need to track compose     
-implementation ("com.segment.analytics.kotlin.signals:compose:0.9.0")
+implementation ("com.segment.analytics.kotlin.signals:core:0.11.0")
 // signal okttp3 plugin if need to track okhttp3 network activity  
-implementation ("com.segment.analytics.kotlin.signals:okhttp3:0.9.0")
+implementation ("com.segment.analytics.kotlin.signals:okhttp3:0.11.0")
 // signal navigation plugin if need to track screen/route  
-implementation ("com.segment.analytics.kotlin.signals:navigation:0.9.0")
+implementation ("com.segment.analytics.kotlin.signals:navigation:0.11.0")
+// signal compose plugin if need to track compose     
+implementation ("com.segment.analytics.kotlin.signals:compose:0.11.0")
+// signal uitoolkit plugin if need to track legacy XML UI
+// NOTE: uitoolkit requires additional setup. see step 4.     
+implementation ("com.segment.analytics.kotlin.signals:uitoolkit:0.11.0")
 ```
 
 2. Setup the initialization code
@@ -59,7 +63,7 @@ navController.turnOnScreenTracking()
   
   add dependency:
   ```groovy
-  implementation ("com.segment.analytics.kotlin.signals:okhttp3:0.9.0")
+  implementation ("com.segment.analytics.kotlin.signals:okhttp3:0.11.0")
   ```
 
   install plugin:
@@ -73,7 +77,7 @@ navController.turnOnScreenTracking()
 
   add dependency:
   ```groovy
-  implementation ("com.segment.analytics.kotlin.signals:okhttp3:0.9.0")
+  implementation ("com.segment.analytics.kotlin.signals:okhttp3:0.11.0")
   ```
   
   install plugin:
@@ -90,7 +94,7 @@ navController.turnOnScreenTracking()
 * For java.net.HttpURLConnection:
     add dependency:
     ```groovy
-    implementation ("com.segment.analytics.kotlin.signals:java-net:0.9.0")
+    implementation ("com.segment.analytics.kotlin.signals:java-net:0.11.0")
     ```
     
     install plugin:
@@ -98,7 +102,24 @@ navController.turnOnScreenTracking()
         JavaNetTrackingPlugin.install()
     ```
 
-4. Build and run your app
+4. Additional setup for legacy XML UI toolkit
+   Add uitoolkit Gradle Plugin dependency to project level `build.gradle`
+    ```groovy
+    buildscript {
+        dependencies {
+            classpath 'com.segment.analytics.kotlin.signals:uitoolkit-gradle-plugin:0.11.0'
+        }
+    }
+    ```
+   Apply the plugin in your app level `build.gradle`
+    ```groovy
+    plugins {
+        // ...other plugins
+        id 'com.segment.analytics.kotlin.signals.uitoolkit-tracking'
+    }
+    ```    
+   
+5. Build and run your app
 
 ## Configuration Options
 
