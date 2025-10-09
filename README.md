@@ -12,7 +12,7 @@
 1. Add the dependency to your module’s Gradle build file.
 ```groovy
 // analytics kotlin 
-implementation ("com.segment.analytics.kotlin:android:1.21.0")
+implementation ("com.segment.analytics.kotlin:android:1.22.0")
 // live plugin 
 implementation("com.segment.analytics.kotlin:analytics-kotlin-live:1.3.0")
 // signal core   
