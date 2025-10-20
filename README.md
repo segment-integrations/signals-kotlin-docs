@@ -3,7 +3,6 @@
   - [Getting Started](#getting-started)
   - [Configuration Options](#configuration-options)
   - [Debug Mode](#debug-mode)
-  - [Fragment Tracking](#fragment-tracking)
   - [Breaking Changes](#breaking-changes)
     - [0.8.0 -\> 0.9.0](#080---090)
 
@@ -51,10 +50,8 @@ Signals.configuration = Configuration(
 // or add `SignalsUIToolkitTrackingPlugin` for legacy UI toolkit
 analytics.add(SignalsComposeTrackingPlugin())
 
-// Add the screen plugin to track Activity based screens
+// Add the screen plugin to track Activity/Fragment based screens
 analytics.add(SignalsActivityTrackingPlugin())
-// If use Navigation with Compose, turn on screen tracking on NavController
-navController.turnOnScreenTracking()
 ```
 
 3. Setup network tracking accordingly.
@@ -102,23 +99,42 @@ navController.turnOnScreenTracking()
         JavaNetTrackingPlugin.install()
     ```
 
-4. Additional setup for legacy XML UI toolkit
-   Add uitoolkit Gradle Plugin dependency to project level `build.gradle`
-    ```groovy
-    buildscript {
-        dependencies {
-            classpath 'com.segment.analytics.kotlin.signals:uitoolkit-gradle-plugin:0.11.0'
-        }
-    }
-    ```
-   Apply the plugin in your app level `build.gradle`
-    ```groovy
-    plugins {
-        // ...other plugins
-        id 'com.segment.analytics.kotlin.signals.uitoolkit-tracking'
-    }
-    ```    
-   
+4. Additional setup 
+   * For Legacy XML UI Toolkit Interactions
+  
+      Add uitoolkit Gradle Plugin dependency to project level `build.gradle`
+       ```groovy
+       buildscript {
+           dependencies {
+               classpath 'com.segment.analytics.kotlin.signals:uitoolkit-gradle-plugin:0.11.0'
+           }
+       }
+       ```
+      Apply the plugin in your app level `build.gradle`
+       ```groovy
+       plugins {
+           // ...other plugins
+           id 'com.segment.analytics.kotlin.signals.uitoolkit-tracking'
+       }
+       ```    
+
+   * For Fragment Navigation and Compose Navigation
+     Add navigation Gradle Plugin dependency to project level `build.gradle`
+     ```groovy
+     buildscript {
+         dependencies {
+             classpath 'com.segment.analytics.kotlin.signals:navigation-gradle-plugin:0.11.0'
+         }
+     }
+     ```
+     Apply the plugin in your app level `build.gradle`
+     ```groovy
+     plugins {
+         // ...other plugins
+         id 'com.segment.analytics.kotlin.signals.navigation-tracking'
+     }
+     ```
+
 5. Build and run your app
 
 ## Configuration Options
@@ -172,16 +188,6 @@ Although `sendDebugSignalsToSegment` offers convenience for logging events remot
         sendDebugSignalsToSegment = remoteConfig.getBoolean("sendDebugSignalsToSegment")
       )
   ```
-
-## Fragment Tracking
-
-Fragment tracking is now supported with some limitations:
-
-- Fragment tracking is enabled by default via `SignalsActivityTrackingPlugin`.
-- Transitions between **activities and fragments** are supported.
-- **VERY LIMITED** support for `ViewPager` / `ViewPager2`:  
-  Due to caching behavior, the data reported by `FragmentManager.FragmentLifecycleCallbacks` can be unreliable. This may result in inaccurate tracking—such as repeated navigation events for the same screen followed by an unexpected jump to a new screen.
-- It is **strongly recommended** to migrate to **Jetpack Compose**, which provides significantly more reliable tracking.
 
 
 ## Breaking Changes
